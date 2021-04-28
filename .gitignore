@@ -360,4 +360,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+.idea/.idea.LOR.Pizzerias/.idea
 .idea/.idea.LOR.Pizzeria/.idea

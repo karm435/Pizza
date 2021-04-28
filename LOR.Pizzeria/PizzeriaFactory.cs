@@ -1,13 +1,13 @@
-﻿using LOR.Pizzeria.Domain;
+﻿using LOR.Pizzerias.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LOR.Pizzeria
+namespace LOR.Pizzerias
 {
 	public class PizzeriaFactory
 	{
-		public static IPizzeria CreatePizzeria(string location)
+		public static Pizzeria CreatePizzeria(string location)
 		{
 			return location switch
 			{

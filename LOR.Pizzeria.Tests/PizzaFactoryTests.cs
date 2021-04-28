@@ -1,11 +1,12 @@
-﻿using System;
+﻿using LOR.Pizzeriass;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace LOR.Pizzeria.Tests
+namespace LOR.Pizzerias.Tests
 {
 	public class PizzaFactoryTests
 	{

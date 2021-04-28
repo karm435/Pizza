@@ -1,33 +1,20 @@
-﻿using LOR.Pizzeria.Domain;
+﻿using LOR.Pizzerias.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LOR.Pizzeria.Domain.Pizzas
+namespace LOR.Pizzerias.Domain.Pizzas
 {
-	public class FlorenzaPizza : IPizza
+	public class FlorenzaPizza : Pizza
 	{
-		public List<string> Ingredients { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public override List<string> Ingredients => new List<string> { "olives", "pastrami", "mozarella", "onion" };
 
-		public void Bake()
-		{
-			throw new NotImplementedException();
-		}
+		public override string Name => "Florenza";
 
-		public void Box()
+		
+		public override void Cut()
 		{
-			throw new NotImplementedException();
-		}
-
-		public void Cut()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Prepare()
-		{
-			throw new NotImplementedException();
+			Console.WriteLine("Cutting pizza into 6 slices with a special knife...");
 		}
 	}
 }

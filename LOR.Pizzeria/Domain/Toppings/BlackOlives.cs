@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LOR.Pizzeria.Domain.Toppings
+namespace LOR.Pizzerias.Domain.Toppings
 {
 	public class BlackOlives : ITopping
 	{
@@ -10,5 +10,7 @@ namespace LOR.Pizzeria.Domain.Toppings
 
 	
 		public decimal Quantity => throw new NotImplementedException();
+
+		public decimal Price => throw new NotImplementedException();
 	}
 }

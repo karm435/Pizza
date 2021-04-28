@@ -2,31 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LOR.Pizzeria.Domain.Pizzas
+namespace LOR.Pizzerias.Domain.Pizzas
 {
-	public class InfernoPizza : IPizza
+	public class InfernoPizza : Pizza
 	{
-		public List<string> Ingredients { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public override List<string> Ingredients => new List<string> { "chili peppers", "mozzarella", "chicken", "cheese" };
 
-		public void Bake()
-		{
-			throw new NotImplementedException();
-		}
+		public override string Name => "Inferno";
 
-		public void Box()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Cut()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Prepare()
-		{
-			throw new NotImplementedException();
-		}
+		
 	}
 }

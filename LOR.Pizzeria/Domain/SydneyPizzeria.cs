@@ -1,16 +1,19 @@
-﻿using System;
+﻿using LOR.Pizzerias.Domain.Pizzas;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LOR.Pizzeria.Domain
+namespace LOR.Pizzerias.Domain
 {
-	class SydneyPizzeria : IPizzeria
+	class SydneyPizzeria : Pizzeria
 	{
-		public string Location => throw new NotImplementedException();
 
-		public IEnumerable<IMenu> Menu => throw new NotImplementedException();
+		public override string Location => throw new NotImplementedException();
 
-		public void PrintReceipt()
+
+		public override IMenu Menu => throw new NotImplementedException();
+
+		public override void PrintReceipt(Pizza[] forOrderedPizzas)
 		{
 			throw new NotImplementedException();
 		}

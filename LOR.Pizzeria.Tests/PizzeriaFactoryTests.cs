@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace LOR.Pizzeria.Tests
+namespace LOR.Pizzerias.Tests
 {
 	public class PizzeriaFactoryTests
 	{

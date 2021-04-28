@@ -1,15 +1,16 @@
-﻿using System.Collections;
+﻿using LOR.Pizzerias.Domain.Pizzas;
+using System.Collections;
 using System.Collections.Generic;
 
-namespace LOR.Pizzeria.Domain
+namespace LOR.Pizzerias.Domain
 {
     public interface IMenu
     {
-        IEnumerable<IPizza> Pizzas { get; }
+        IEnumerable<Pizza> Pizzas { get; }
         
         IEnumerable<ITopping> Toppings { get;  }
         
-        IDictionary<IPizza, decimal> PizzaPrices { get; }
+        IDictionary<string, decimal> PizzaPrices { get; }
         
     }
 }

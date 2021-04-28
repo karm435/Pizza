@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LOR.Pizzeria", "LOR.Pizzeria\LOR.Pizzeria.csproj", "{4178A61E-1E91-4678-9ED1-FB4DD68ABD63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LOR.Pizzerias", "LOR.Pizzeria\LOR.Pizzerias.csproj", "{4178A61E-1E91-4678-9ED1-FB4DD68ABD63}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BB2559FD-0130-4399-87AC-EFA9AF23F452}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOR.Pizzeria.Tests", "LOR.Pizzeria.Tests\LOR.Pizzeria.Tests.csproj", "{1A265DB7-8EB2-4F68-944C-6E0B720C4EAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOR.Pizzerias.Tests", "LOR.Pizzeria.Tests\LOR.Pizzerias.Tests.csproj", "{1A265DB7-8EB2-4F68-944C-6E0B720C4EAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

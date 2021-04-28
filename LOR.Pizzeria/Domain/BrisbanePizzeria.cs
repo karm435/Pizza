@@ -1,16 +1,18 @@
-﻿using System;
+﻿using LOR.Pizzerias.Domain.Pizzas;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LOR.Pizzeria.Domain
+namespace LOR.Pizzerias.Domain
 {
-	public class BrisbanePizzeria : IPizzeria
+	public class BrisbanePizzeria : Pizzeria
 	{
-		public string Location => "Brisbane";
+		public override string Location => "Brisbane";
 
-		public IEnumerable<IMenu> Menu => throw new NotImplementedException();
+		public override IMenu Menu => new BrisbanePizzeriaMenu();
 
-		public void PrintReceipt()
+
+		public override void PrintReceipt(Pizza[] forOrderedPizzas)
 		{
 			throw new NotImplementedException();
 		}
@@ -23,12 +25,16 @@ namespace LOR.Pizzeria.Domain
 
 	public class BrisbanePizzeriaMenu : IMenu
 	{
-		public IEnumerable<IPizza> Pizzas => throw new NotImplementedException();
+		public IEnumerable<Pizza> Pizzas => new List<Pizza>()
+		{
+			new CapriciosaPizza(),
+			new FlorenzaPizza(),
+			new MargheritaPizza()
+		};
 
 		public IEnumerable<ITopping> Toppings => throw new NotImplementedException();
 
-		public IDictionary<ITopping, decimal> ToppingsPrices => throw new NotImplementedException();
+		public IDictionary<string, decimal> PizzaPrices => throw new NotImplementedException();
 
-		public IDictionary<IPizza, decimal> PizzaPrices => throw new NotImplementedException();
 	}
 }

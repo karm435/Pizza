@@ -1,18 +1,19 @@
-﻿using LOR.Pizzeria.Domain;
-using LOR.Pizzeria.Domain.Pizzas;
+﻿using LOR.Pizzerias.Domain;
+using LOR.Pizzerias.Domain.Pizzas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOR.Pizzeria
+namespace LOR.Pizzeriass
 {
 	public class PizzaFactory
 	{
-		public static IPizza CreatePizza(string name)
+		public static Pizza CreatePizza(string name)
 		{
-			return name switch
+
+			Pizza pizza = name switch
 			{
 				"Capriciosa" => new CapriciosaPizza(),
 				"Florenza" => new FlorenzaPizza(),
@@ -20,6 +21,8 @@ namespace LOR.Pizzeria
 				"Inferno" => new InfernoPizza(),
 				_ => null
 			};
+
+			return pizza;
 		}
 	}
 }

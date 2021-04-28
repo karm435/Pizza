@@ -2,31 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LOR.Pizzeria.Domain.Pizzas
+namespace LOR.Pizzerias.Domain.Pizzas
 {
-	public class MargheritaPizza : IPizza
+	public class MargheritaPizza : Pizza
 	{
-		public List<string> Ingredients { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public override List<string> Ingredients => new List<string> { "mozarella", "onion", "garlic", "oregano" };
 
-		public void Bake()
-		{
-			throw new NotImplementedException();
-		}
+		public override string Name => "Margherita";
 
-		public void Box()
+		public override void Bake()
 		{
-			throw new NotImplementedException();
-		}
-
-		public void Cut()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Prepare()
-		{
-			throw new NotImplementedException();
+			Console.WriteLine("Baking pizza for 15 minutes at 200 degrees...");
 		}
 	}
 }
