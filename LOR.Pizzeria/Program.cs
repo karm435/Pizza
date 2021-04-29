@@ -9,77 +9,115 @@ namespace LOR.Pizzerias
     class Program
     {
         static void Main(string[] args)
-        {
-            WriteLine("Welcome to LOR Pizzeria! Please select the store location: Brisbane OR Sydney");
-            var store = ReadLine();
-            var pizzaStore = PizzeriaFactory.CreatePizzeria(store);
-            if(pizzaStore == null)
+		{
+			WriteLine("Welcome to LOR Pizzeria! Please select the store location: Brisbane OR Sydney");
+			var store = ReadLine();
+
+			var pizzaStore = PizzeriaFactory.CreatePizzeria(store);
+			if (pizzaStore == null)
 			{
-                WriteLine($"Looks like we don't have a store at {store} location.");
-                return;
+				WriteLine($"Looks like we don't have a store at {store} location.");
+				return;
 			}
 
-            WriteLine("MENU", Console.ForegroundColor);
-            WriteLine($"{pizzaStore.Location} has these Pizzas");
-			foreach (var availablePizza in pizzaStore.Menu.Pizzas)
+			PrintMenuForStore(pizzaStore);
+
+			var pizzasOrdered = new List<(PizzaTypes, List<ToppingType>)>();
+			bool wouldLikeToOrderMore;
+			do
 			{
-                WriteLine(availablePizza.ToString() + $" {pizzaStore.Menu.PizzaPrices[availablePizza.Name]} AUD");
-			}
+				WriteLine("What can I get you?");
 
-            WriteLine("What can I get you?");
+				var pizzaType = ReadLine();
 
-            var pizzaType = ReadLine();
-            
-            if (Enum.TryParse(typeof(PizzaTypes), pizzaType, out var selectedPizza)) {
-
-                WriteLine("Toppings available", ConsoleColor.Green);
-                foreach (var availableTopping in pizzaStore.Menu.ToppingsAvailable)
-                {
-                    WriteLine($"{availableTopping} for {pizzaStore.Menu.ToppingsPrices[availableTopping]}");
-                }
-
-                WriteLine("Would you like to add any toppings? Press y for Yes and n for No");
-
-                var answer = ReadKey();
-                var moreToppingsToAdd = "";
-                var toppings = new List<ToppingType>();
-                if(answer.Key.ToString().Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+				if (Enum.TryParse(typeof(PizzaTypes), pizzaType, out var selectedPizza))
 				{
-                    do
-                    {
-                        WriteLine("Which one do you want?");
+					List<ToppingType> toppings = GetToppingsToAdd(pizzaStore);
 
-                        var toppingType = ReadLine();
-                        if (Enum.TryParse(typeof(ToppingType), toppingType, out var selectedTopping))
-                        {
-                            toppings.Add((ToppingType)selectedTopping);
-                        }
-                        else
-                        {
-                            WriteLine($"Looks like {toppingType} is not available");
-                        }
+					pizzasOrdered.Add(((PizzaTypes)selectedPizza, toppings));
 
-                        WriteLine("Would you like to add more toppings? Press y for Yes and n for No");
-
-                        moreToppingsToAdd = ReadKey().Key.ToString();
-                    } while (moreToppingsToAdd.Equals("Y", StringComparison.InvariantCultureIgnoreCase));
+					WriteLine();
+				}
+				else
+				{
+					WriteLine($"Selected pizza {pizzaType} is not available");
 				}
 
-                WriteLine();
+				WriteLine("Would you like to order more pizzas? Press y for Yes and n for No");
 
-                var pizza = pizzaStore.Order((PizzaTypes)selectedPizza, toppings);
-                if (pizza == null) return;
+				wouldLikeToOrderMore = ReadKey().Key.ToString().Equals("Y", StringComparison.InvariantCultureIgnoreCase);
 
-                var totalPrice = pizzaStore.TotalPrice(new[] { pizza });
-                WriteLine($"Total price is {totalPrice}");
+				WriteLine();
 
-                WriteLine("\nYour pizza is ready!");
-            }
-            else
+			} while (wouldLikeToOrderMore);
+
+			// Process the order
+			var pizzas = new List<Pizza>();
+			foreach (var orderedPizza in pizzasOrdered)
 			{
-                WriteLine($"Selected pizza {pizzaType} is not available");
+				var pizza = pizzaStore.Order((PizzaTypes)orderedPizza.Item1, orderedPizza.Item2);
+				pizzas.Add(pizza);
 			}
-			
-        }
-    }
+
+
+			var totalPrice = pizzaStore.TotalPrice(pizzas.ToArray());
+
+			WriteLine($"Total price is {totalPrice}");
+
+			WriteLine("\nYour pizza is ready!");
+		}
+
+		private static void PrintMenuForStore(Pizzeria pizzaStore)
+		{
+			WriteLine("MENU", Console.ForegroundColor);
+
+			WriteLine($"{pizzaStore.Location} has these Pizzas");
+			foreach (var availablePizza in pizzaStore.Menu.Pizzas)
+			{
+				WriteLine(availablePizza.ToString() + $" {pizzaStore.Menu.PizzaPrices[availablePizza.Name]} AUD");
+			}
+		}
+
+		private static List<ToppingType> GetToppingsToAdd(Pizzeria pizzaStore)
+		{
+			WriteLine("Toppings available");
+
+			foreach (var availableTopping in pizzaStore.Menu.ToppingsAvailable)
+			{
+				WriteLine($"{availableTopping} for {pizzaStore.Menu.ToppingsPrices[availableTopping]}");
+			}
+
+			WriteLine("Would you like to add any toppings? Press y for Yes and n for No");
+
+
+			var answer = ReadKey();
+			var toppings = new List<ToppingType>();
+			if (answer.Key.ToString().Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+			{
+				bool moreToppingsToAdd;
+				do
+				{
+					WriteLine();
+					WriteLine("Which one do you want?");
+
+					var toppingType = ReadLine();
+					if (Enum.TryParse(typeof(ToppingType), toppingType, out var selectedTopping))
+					{
+						toppings.Add((ToppingType)selectedTopping);
+					}
+					else
+					{
+						WriteLine($"Looks like {toppingType} is not available");
+					}
+
+					WriteLine("Would you like to add more toppings? Press y for Yes and n for No");
+
+					moreToppingsToAdd = ReadKey().Key.ToString().Equals("Y", StringComparison.InvariantCultureIgnoreCase);
+					WriteLine();
+				} while (moreToppingsToAdd);
+			}
+
+			return toppings;
+		}
+	}
 }
