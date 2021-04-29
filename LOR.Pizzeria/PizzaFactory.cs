@@ -10,15 +10,14 @@ namespace LOR.Pizzeriass
 {
 	public class PizzaFactory
 	{
-		public static Pizza CreatePizza(string name)
+		public static Pizza CreatePizza(PizzaTypes name)
 		{
-
 			Pizza pizza = name switch
 			{
-				"Capriciosa" => new CapriciosaPizza(),
-				"Florenza" => new FlorenzaPizza(),
-				"Margherita" => new MargheritaPizza(),
-				"Inferno" => new InfernoPizza(),
+				PizzaTypes.Capriciosa => new CapriciosaPizza(),
+				PizzaTypes.Florenza => new FlorenzaPizza(),
+				PizzaTypes.Margherita => new MargheritaPizza(),
+				PizzaTypes.Inferno => new InfernoPizza(),
 				_ => null
 			};
 

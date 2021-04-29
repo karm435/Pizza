@@ -6,11 +6,11 @@ namespace LOR.Pizzerias.Domain.Toppings
 {
 	public class BlackOlives : ITopping
 	{
-		public string Name => throw new NotImplementedException();
+		public ToppingType Type => ToppingType.BlackOlives;
 
 	
-		public decimal Quantity => throw new NotImplementedException();
+		public decimal Quantity { get; set; }
 
-		public decimal Price => throw new NotImplementedException();
+		public decimal Price => 1.5m;
 	}
 }

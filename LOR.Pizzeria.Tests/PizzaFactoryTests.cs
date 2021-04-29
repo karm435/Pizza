@@ -1,4 +1,5 @@
-﻿using LOR.Pizzeriass;
+﻿using LOR.Pizzerias.Domain.Pizzas;
+using LOR.Pizzeriass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace LOR.Pizzerias.Tests
 		[Fact]
 		public void ShouldCreateInfernoPizza()
 		{
-			var pizzaType = "Inferno";
+			var pizzaType = PizzaTypes.Inferno;
 
 			var pizza = PizzaFactory.CreatePizza(pizzaType);
 
-			Assert.Equal(pizza.Name, pizzaType);
+			Assert.Equal(pizza.Name, pizzaType.ToString());
 		}
 	}
 }

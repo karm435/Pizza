@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using LOR.Pizzerias.Domain.Toppings;
 
 namespace LOR.Pizzerias.Domain
 {
@@ -29,7 +30,11 @@ namespace LOR.Pizzerias.Domain
 			new MargheritaPizza()
 		};
 
-		public IEnumerable<ITopping> Toppings => throw new NotImplementedException();
+		public IEnumerable<ToppingType> ToppingsAvailable => new List<ToppingType>()
+		{
+			ToppingType.BlackOlives,
+			ToppingType.Pineapple
+		};
 
 		public IDictionary<string, decimal> PizzaPrices => new Dictionary<string, decimal>()
 		{
@@ -38,5 +43,10 @@ namespace LOR.Pizzerias.Domain
 			{"Margherita", 22.00m }
 		};
 
+		public IDictionary<ToppingType, decimal> ToppingsPrices => new Dictionary<ToppingType, decimal>()
+		{
+			{ ToppingType.BlackOlives, 1.5m },
+			{ ToppingType.Pineapple, 2.0m }
+		};
 	}
 }

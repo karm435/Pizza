@@ -5,6 +5,7 @@ using System.Collections;
 using System.Linq;
 
 using System.Collections.Generic;
+using LOR.Pizzerias.Domain.Toppings;
 
 namespace LOR.Pizzerias.Domain
 {
@@ -14,19 +15,37 @@ namespace LOR.Pizzerias.Domain
 
         public abstract IMenu Menu { get; }
 
-        public virtual void PrintReceipt(Pizza[] forOrderedPizzas)
+        public virtual decimal TotalPrice(Pizza[] forOrderedPizzas)
 		{
             var totalPrice = forOrderedPizzas.Sum(x => Menu.PizzaPrices[x.Name]);
-            Console.WriteLine($"Total Price: {totalPrice}");
+			foreach (var pizza in forOrderedPizzas)
+			{
+                if(pizza.Toppings.Count > 0)
+				{
+					foreach (var topping in pizza.Toppings)
+					{
+                        totalPrice += Menu.ToppingsPrices[topping.Type];
+					}
+				}
+			}
+            return totalPrice;
         }
 
-        public Pizza Order(string type)
+        public Pizza Order(PizzaTypes type, IEnumerable<ToppingType> withToppings = null)
 		{
             var pizza = PizzaFactory.CreatePizza(type);
             if(pizza == null)
 			{
                 Console.WriteLine($"Selected {type} Pizza is not available at {Location}");
                 return null;
+			}
+            if(withToppings != null && withToppings.Any())
+			{
+				foreach (var toppingType in withToppings)
+				{
+                    var topping = ToppingsFactory.CreateTopping(toppingType);
+                    pizza.Toppings.Add(topping);
+				}
 			}
             pizza.Prepare();
             pizza.Bake();

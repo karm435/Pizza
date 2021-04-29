@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOR.Pizzerias.Domain
+namespace LOR.Pizzerias.Domain.Toppings
 {
-	public enum PizzaTypes
+	public enum ToppingType
 	{
-
+		 BlackOlives,
+		 Pineapple
 	}
 }

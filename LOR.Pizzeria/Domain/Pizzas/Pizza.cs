@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LOR.Pizzerias.Domain.Toppings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,6 +8,9 @@ namespace LOR.Pizzerias.Domain.Pizzas
 	public abstract class Pizza
 	{
 		public abstract List<string> Ingredients { get; }
+
+		public List<ITopping> Toppings = new();
+		
 		public abstract string Name { get; }
 
 		public virtual void Bake()
@@ -30,11 +34,26 @@ namespace LOR.Pizzerias.Domain.Pizzas
 				Console.Write(i + " ");
 			}
 			Console.WriteLine();
+			if (Toppings.Count > 0)
+			{
+				Console.WriteLine("Adding selected Toppings");
+				Console.Write("Adding ");
+				foreach (var topping in Toppings)
+				{
+					Console.Write(topping.Type + " ");
+				}
+			}
+			Console.WriteLine();
 		}
 
 		public override string ToString()
 		{
-			return $"{Name} - {string.Join(",", Ingredients)}";
+			var pizza =  $"{Name} - {string.Join(",", Ingredients)}";
+			if(Toppings.Count > 0)
+			{
+				return $"{pizza} with toppings {string.Join(",", Toppings.Select(t => t.Type.ToString()))}";
+			}
+			return pizza;
 		}
 	}
 }
