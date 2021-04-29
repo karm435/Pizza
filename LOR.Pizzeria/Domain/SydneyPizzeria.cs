@@ -7,15 +7,29 @@ namespace LOR.Pizzerias.Domain
 {
 	class SydneyPizzeria : Pizzeria
 	{
-
-		public override string Location => throw new NotImplementedException();
-
-
-		public override IMenu Menu => throw new NotImplementedException();
-
-		public override void PrintReceipt(Pizza[] forOrderedPizzas)
+		private IMenu _menu;
+		public SydneyPizzeria()
 		{
-			throw new NotImplementedException();
+			_menu = new SydneyPizzeriaMenu();
 		}
+		public override string Location => "Sydney";
+
+		public override IMenu Menu => _menu;
+	}
+
+	public class SydneyPizzeriaMenu : IMenu
+	{
+		public IEnumerable<Pizza> Pizzas => new List<Pizza>()
+		{
+			new CapriciosaPizza(),
+			new InfernoPizza()
+		};
+		public IEnumerable<ITopping> Toppings => throw new NotImplementedException();
+
+		public IDictionary<string, decimal> PizzaPrices => new Dictionary<string, decimal>()
+		{
+			{"Capriciosa", 30.00m }, // TODO: Use PizzaType enum
+			{"Inferno", 31.00m }
+		};
 	}
 }

@@ -34,7 +34,7 @@ namespace LOR.Pizzerias.Domain.Pizzas
 
 		public override string ToString()
 		{
-			return $"${Name} - ${string.Join(",", Ingredients)}";
+			return $"{Name} - {string.Join(",", Ingredients)}";
 		}
 	}
 }

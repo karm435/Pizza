@@ -2,25 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace LOR.Pizzerias.Domain
 {
 	public class BrisbanePizzeria : Pizzeria
 	{
-		public override string Location => "Brisbane";
-
-		public override IMenu Menu => new BrisbanePizzeriaMenu();
-
-
-		public override void PrintReceipt(Pizza[] forOrderedPizzas)
-		{
-			throw new NotImplementedException();
-		}
+		private IMenu _menu;
 
 		public BrisbanePizzeria()
 		{
-			
+			_menu = new BrisbanePizzeriaMenu();
 		}
+		public override string Location => "Brisbane";
+
+		public override IMenu Menu => _menu;
+
 	}
 
 	public class BrisbanePizzeriaMenu : IMenu
@@ -34,7 +31,12 @@ namespace LOR.Pizzerias.Domain
 
 		public IEnumerable<ITopping> Toppings => throw new NotImplementedException();
 
-		public IDictionary<string, decimal> PizzaPrices => throw new NotImplementedException();
+		public IDictionary<string, decimal> PizzaPrices => new Dictionary<string, decimal>()
+		{
+			{"Capriciosa", 20.00m }, // TODO: Use PizzaType enum
+			{"Florenza", 21.00m },
+			{"Margherita", 22.00m }
+		};
 
 	}
 }
